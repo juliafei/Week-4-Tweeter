@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		150B56131C94B959008F6FEE /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150B56121C94B959008F6FEE /* TweetCell.swift */; };
+		150B56151C9530B2008F6FEE /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150B56141C9530B2008F6FEE /* TweetCell.swift */; };
 		159C98201C946E1D0053BA73 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159C981F1C946E1D0053BA73 /* LoginViewController.swift */; };
 		159C98251C9470CD0053BA73 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159C98241C9470CD0053BA73 /* User.swift */; };
 		159C98271C9470D60053BA73 /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159C98261C9470D60053BA73 /* Tweet.swift */; };
@@ -40,7 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		150B56121C94B959008F6FEE /* TweetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetCell.swift; sourceTree = "<group>"; };
+		150B56141C9530B2008F6FEE /* TweetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetCell.swift; sourceTree = "<group>"; };
 		159C981F1C946E1D0053BA73 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		159C98241C9470CD0053BA73 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		159C98261C9470D60053BA73 /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
@@ -140,7 +140,7 @@
 		15A09DBD1C946C6500D8C66C /* Tweeter */ = {
 			isa = PBXGroup;
 			children = (
-				150B56121C94B959008F6FEE /* TweetCell.swift */,
+				150B56141C9530B2008F6FEE /* TweetCell.swift */,
 				159C98231C9470780053BA73 /* API */,
 				159C98221C94706E0053BA73 /* ViewControllers */,
 				159C98211C9470620053BA73 /* Models */,
@@ -371,7 +371,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				159C98251C9470CD0053BA73 /* User.swift in Sources */,
-				150B56131C94B959008F6FEE /* TweetCell.swift in Sources */,
+				150B56151C9530B2008F6FEE /* TweetCell.swift in Sources */,
 				159C98271C9470D60053BA73 /* Tweet.swift in Sources */,
 				159C98201C946E1D0053BA73 /* LoginViewController.swift in Sources */,
 				159C982B1C9481860053BA73 /* TweetsViewController.swift in Sources */,

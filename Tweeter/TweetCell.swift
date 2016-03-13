@@ -2,44 +2,52 @@
 //  TweetCell.swift
 //  Tweeter
 //
-//  Created by Julia Lau on 3/12/16.
+//  Created by Julia Lau on 3/13/16.
 //  Copyright © 2016 Julia Lau. All rights reserved.
 //
 
 import UIKit
 
-protocol CellDelegate {
-    func userMentionClicked(username: String)
-}
-
-
 class TweetCell: UITableViewCell {
 
+    //Label
     @IBOutlet weak var pictureLabel: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var bodyLabel: UILabel!
-    @IBOutlet weak var retweetButton: UIButton!
-    @IBOutlet weak var favoriteButton: UIButton!
-    @IBOutlet weak var timestamp: UILabel!
     @IBOutlet weak var handleLabel: UILabel!
+    @IBOutlet weak var timestamp: UILabel!
+    @IBOutlet weak var bodyLabel: UILabel!
     @IBOutlet weak var retweetCountLabel: UILabel!
     @IBOutlet weak var favoriteCountLabel: UILabel!
+    
+    //Button
+    @IBOutlet weak var retweetButton: UIButton!
+    @IBOutlet weak var favoriteButton: UIButton!
+    
     var id: String = ""
     
     var tweet: Tweet!
         {
         didSet{
-            id = tweet.number
             nameLabel.text = tweet.user?.name as? String
+            handleLabel.text = tweet.user?.username
             bodyLabel.text = tweet.text
             favoriteCountLabel.text = String(tweet.favoriteCount)
             retweetCountLabel.text = String(tweet.retweetCount)
-            pictureLabel.setImageWithURL((tweet.user?.profileUrl)!)
-            timestamp.text = tweet?.getTimeDifference()
+            pictureLabel.setImageWithURL((tweet.user?.profileUrl!)!)
+            pictureLabel.layer.cornerRadius = 10.0
+            pictureLabel.clipsToBounds = true
+            
+        
+            id = tweet.number
+            timestamp.text = getTime(tweet.timestamp!.timeIntervalSinceNow)
+            
+            
         }
     }
     
-   /* @IBAction func onRetweet(sender: AnyObject) {
+    
+    
+    @IBAction func onRetweet(sender: AnyObject) {
         TwitterClient.sharedInstance.Retweet(Int(id)!, params: nil, completion: {(error) -> () in
             self.retweetButton.setImage(UIImage(named: "retweet"), forState: UIControlState.Normal)
             self.retweetCountLabel.text = String(self.tweet.retweetCount + 1)
@@ -48,72 +56,54 @@ class TweetCell: UITableViewCell {
     
     @IBAction func onFavorite(sender: AnyObject) {
         TwitterClient.sharedInstance.Favorite(Int(id)!, params: nil, completion: {(error) -> () in
-            self.favoriteButton.setImage(UIImage(named: "favorite"), forState: UIControlState.Normal)
+            self.favoriteButton.setImage(UIImage(named: "like"), forState: UIControlState.Normal)
             self.favoriteCountLabel.text = String(self.tweet.favoriteCount + 1)
         })
         
-
     }
     
-    */
-    
-    
-    
-    
-   
-    /*
-    var retweeted: Bool!
-    var favorited: Bool!
-   // var media_url: NSURL?
-    var delegate: CellDelegate?
-    var tweet: Tweet! {
-        didSet {
-            nameLabel.text = tweet?.user?.name as! String
-            timestamp.text = tweet?.getTimeDifference()
-            //handleLabel.text = "@\(tweet!.user!.screenName!)"
-            bodyLabel.text = tweet?.text
-            
-            //let profile_picture_url = NSURL(string: (tweet.user?.profileImageUrl!)!)
-            //pictureLabel.setImageWithURL(profile_picture_url!)
-            //pictureLabel.layer.cornerRadius = 10.0
-            //pictureLabel.clipsToBounds = true
-            if tweet.favoriteCount > 10 {
-                favoriteCountLabel.hidden = false
-                favoriteCountLabel.text = "\(tweet.favoriteCount!)"
-            }
-            else {
-                favoriteCountLabel.hidden = true
-            }
-            if tweet.retweetCount > 5 {
-                retweetCountLabel.hidden = false
-                retweetCountLabel.text = "\(tweet.retweetCount!)"
-            }
-            else {
-                retweetCountLabel.hidden = true
-            }
-            retweeted = tweet.retweeted
-            favorited = tweet.favorited
-            
-            bodyLabel.handleMentionTap { userHandle in
-                self.delegate?.userMentionClicked(userHandle)
-            }
-            bodyLabel.handleURLTap { url in
-                print(url)
-                UIApplication.sharedApplication().openURL(url)
-            }
-            setButtons()
-
-        }
-
-    }
-    */
-        override func awakeFromNib() {
-        super.awakeFromNib()
-        }
+    func getTime(time: NSTimeInterval) -> String
+    {
+        var givenT = -Int(time)
+        var calculatedT: Int = 0
         
-        override func setSelected(selected: Bool, animated: Bool) {
+        print("timegiven: \(givenT)")
+        
+        if givenT == 0{
+            return "Now"
+        }
+        else if givenT <= 60{
+            return "\(givenT)s"
+        }
+        else if (givenT/60 <= 60){
+            calculatedT = givenT/60
+            return "\(calculatedT)m"
+        }
+        else if (givenT/3600 <= 24){
+            calculatedT = givenT/3600
+            return "\(calculatedT)h"
+        }
+        else if (givenT/(3600*24) <= 365){
+            calculatedT = givenT/(3600*24)
+            return "\(calculatedT)d"
+        }
+        else{
+            calculatedT = givenT/(3600*24*365)
+            return "\(calculatedT)y"
+        }
+        return "\(calculatedT)"
+    }
+    
+    
+    override func awakeFromNib() {
+        //  weak var usernameLabel: UILabel!
+        super.awakeFromNib()
+        // Initialization code
+    }
+    override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
-        }
+    }
+    
 }

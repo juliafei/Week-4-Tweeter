@@ -8,28 +8,30 @@
 
 import UIKit
 
-class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    
-    @IBOutlet weak var tableView: UITableView!
-    var tweets:[Tweet]!
-    override func viewDidLoad() {
 
+
+class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
+    
+    var tweets: [Tweet]!
+    @IBOutlet weak var tableView: UITableView!
+    
+    override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.dataSource = self
         tableView.delegate = self
+        tableView.dataSource = self
         
-            TwitterClient.sharedInstance.homeTimeLine({(tweets: [Tweet]) -> () in
-                
-                self.tweets = tweets
-                self.tableView.reloadData()
-                
-                for tweet in tweets{
-                    print(tweet.text)
-                }
-                }, failure: { (error: NSError) -> () in print(error.localizedDescription)
-                })
-
+        
+        TwitterClient.sharedInstance.homeTimeLine({(tweets: [Tweet]) -> () in
+            self.tweets = tweets
+            self.tableView.reloadData()
+            for tweet in tweets{
+                print(tweet.text)
+            }
+            }) { (error: NSError) -> () in
+                print(error.localizedDescription)
+        }
+        
         // Do any additional setup after loading the view.
     }
 
@@ -51,27 +53,21 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell", forIndexPath: indexPath) as! TweetCell
-        cell.tweet = tweets?[indexPath.row]
+        //let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! UITableViewCell!
         
-        return cell
-    }
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell", forIndexPath: indexPath) as! TweetCell
     
-  /* func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
-
-    }
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell", forIndexPath: indexPath) as! TweetCell
-        cell.textLabel!.text = "row\(indexPath.row)"
-        print("row\(indexPath.row)")
+        //let cell = UITableViewCell(style: .Default, reuseIdentifier: nil)
+        cell.tweet = tweets[indexPath.row]
+        // cell.textLabel?.text = tweets?[indexPath.row]
+        
+        // let tweet = self.tableView.dataSource[indexPath.row] as! NSDictionary
+        
+        
+        
         return cell
-        
-        
-
-        
     }
-*/
     
 
     @IBAction func onLogoutButton(sender: AnyObject) {
